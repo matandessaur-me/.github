@@ -1,146 +1,200 @@
-<svg viewBox="0 0 900 640" width="900" height="640" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-      <path d="M50 0H0V50" fill="none" stroke="#5d70f6" stroke-width="1" stroke-opacity="0.05"/>
-    </pattern>
-    <linearGradient id="topgrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#5d70f6" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#5d70f6" stop-opacity="0"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="10%" cy="10%" r="60%">
-      <stop offset="0%"   stop-color="#5d70f6" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#5d70f6" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 900 380" width="900" height="380" data-abp-filters-channel="3ca9829b-be89-4665-b7b0-c9123e2d34dc"><script xmlns="" id="datalayer-checker-script"/>
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <!-- BG -->
-  <rect width="900" height="640" fill="#0a0b10"/>
-  <rect width="900" height="640" fill="url(#grid)"/>
-  <rect width="900" height="640" fill="url(#glow)"/>
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+          from { width: 0; }
+          to   { width: 100%; }
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0.4; }
+        }
+        @keyframes scanline {
+          0%   { transform: translateY(-100%); }
+          100% { transform: translateY(400px); }
+        }
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0; }
+        }
+        @keyframes revealLeft {
+          from { opacity: 0; transform: translateX(-12px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
 
-  <!-- Top accent bar -->
-  <rect x="0" y="0" height="2" fill="url(#topgrad)">
-    <animate attributeName="width" from="0" to="620" dur="0.7s" begin="0s" fill="freeze"/>
-  </rect>
+        .wrap {
+          width: 900px;
+          height: 380px;
+          background: #07080f;
+          font-family: 'Courier New', Courier, monospace;
+          overflow: hidden;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 0 64px;
+        }
 
-  <!-- -- NAV -- -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.1s" fill="freeze"/>
-    <text x="56" y="48" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="14" font-weight="800" letter-spacing="2.5" fill="#ffffff">MATAN
-      <tspan fill="#5d70f6" letter-spacing="0">.</tspan>DESSAUR
-    </text>
-    <text x="614" y="48" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="12" font-weight="500" fill="#3e4265" letter-spacing="2">WORK</text>
-    <text x="672" y="48" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="12" font-weight="500" fill="#3e4265" letter-spacing="2">STACK</text>
-    <text x="740" y="48" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="12" font-weight="500" fill="#3e4265" letter-spacing="2">OPEN SOURCE</text>
-  </g>
+        /* Subtle grid lines */
+        .grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(93,112,246,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(93,112,246,0.04) 1px, transparent 1px);
+          background-size: 40px 40px;
+        }
 
-  <!-- Nav rule -->
-  <line x1="56" y1="64" x2="844" y2="64" stroke="#5d70f6" stroke-width="1" stroke-opacity="0.13" opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="0.2s" fill="freeze"/>
-  </line>
+        /* Left accent bar */
+        .accent-bar {
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background: #5d70f6;
+          animation: fadeUp 0.4s ease forwards;
+        }
 
-  <!-- -- EYEBROW -- -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.3s" fill="freeze"/>
-    <line x1="56" y1="95" x2="56" y2="95" stroke="#5d70f6" stroke-width="1">
-      <animate attributeName="x2" from="56" to="110" dur="0.5s" begin="0.8s" fill="freeze"/>
-    </line>
-    <text x="120" y="100" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="12" font-weight="500" fill="#5d70f6" letter-spacing="3">AI BUILDER • OPEN SOURCE</text>
-  </g>
+        /* Scanline effect */
+        .scanline {
+          position: absolute;
+          left: 0; right: 0;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, rgba(93,112,246,0.15), transparent);
+          animation: scanline 6s linear infinite;
+          pointer-events: none;
+        }
 
-  <!-- -- HEADLINE -- -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="0.4s" fill="freeze"/>
-    <text x="52" y="188" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="82" font-weight="900" fill="#ffffff" letter-spacing="-2">BUILD.</text>
-    <text x="52" y="276" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="82" font-weight="900" fill="#5d70f6" letter-spacing="-2">SHIP.</text>
-    <text x="52" y="364" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="82" font-weight="900" fill="#ffffff" letter-spacing="-2">REPEAT.</text>
-  </g>
+        /* Top label */
+        .label {
+          font-size: 10px;
+          letter-spacing: 0.35em;
+          text-transform: uppercase;
+          color: #5d70f6;
+          opacity: 0;
+          animation: revealLeft 0.5s ease 0.2s forwards;
+          margin-bottom: 20px;
+        }
 
-  <!-- -- TAGLINE -- -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.6s" fill="freeze"/>
-    <text x="56" y="400" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="14" fill="#55607a" letter-spacing="0.3">I build and deploy AI-powered solutions</text>
-    <text x="56" y="420" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="14" fill="#55607a" letter-spacing="0.3">that turn problems into working systems.</text>
-  </g>
+        /* Main headline */
+        .headline {
+          font-family: 'Arial Narrow', Arial, sans-serif;
+          font-size: 68px;
+          font-weight: 900;
+          line-height: 1;
+          letter-spacing: -0.02em;
+          color: #ffffff;
+          opacity: 0;
+          animation: fadeUp 0.6s ease 0.4s forwards;
+          margin-bottom: 6px;
+        }
+        .headline .accent { color: #5d70f6; }
 
-  <!-- -- CTA -- -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.8s" fill="freeze"/>
-    <rect x="56" y="442" width="170" height="42" rx="3" fill="#5d70f6"/>
-    <text x="141" y="468" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="12" font-weight="700" fill="#ffffff" letter-spacing="2" text-anchor="middle">EXPLORE REPOS</text>
-    <text x="246" y="468" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="12" fill="#3e4265" letter-spacing="1.5">MATANDESSAUR.ME ?</text>
-    <line x1="246" y1="471" x2="416" y2="471" stroke="#252840" stroke-width="1"/>
-  </g>
+        /* Underline rule */
+        .rule {
+          height: 2px;
+          background: #5d70f6;
+          width: 0;
+          animation: slideIn 0.7s cubic-bezier(0.4,0,0.2,1) 0.9s forwards;
+          margin-bottom: 20px;
+        }
 
-  <!-- -- CARD 1: Status -- -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.5s" fill="freeze"/>
-    <rect x="610" y="106" width="242" height="86" rx="5"
-      fill="#ffffff" fill-opacity="0.025" stroke="#5d70f6" stroke-opacity="0.15" stroke-width="1"/>
-    <text x="630" y="130" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="10" font-weight="600" fill="#2e3455" letter-spacing="3">STATUS</text>
-    <!-- Pill -->
-    <rect x="630" y="140" width="172" height="30" rx="15"
-      fill="#5d70f6" fill-opacity="0.09" stroke="#5d70f6" stroke-opacity="0.25" stroke-width="1"/>
-    <!-- Pulse dot -->
-    <circle cx="647" cy="155" r="3" fill="#5d70f6">
-      <animate attributeName="opacity" values="1;0.2;1" dur="1.8s" repeatCount="indefinite"/>
-    </circle>
-    <text x="657" y="160" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="11" font-weight="600" fill="#5d70f6" letter-spacing="1.2">ACTIVELY BUILDING</text>
-  </g>
+        /* Sub copy */
+        .sub {
+          font-size: 13px;
+          letter-spacing: 0.08em;
+          color: #8892b0;
+          opacity: 0;
+          animation: fadeUp 0.6s ease 1.1s forwards;
+          max-width: 540px;
+          line-height: 1.7;
+        }
 
-  <!-- -- CARD 2: Focus -- -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.65s" fill="freeze"/>
-    <rect x="610" y="204" width="242" height="96" rx="5"
-      fill="#ffffff" fill-opacity="0.025" stroke="#5d70f6" stroke-opacity="0.15" stroke-width="1"/>
-    <text x="630" y="228" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="10" font-weight="600" fill="#2e3455" letter-spacing="3">FOCUS</text>
-    <text x="630" y="266" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="26" font-weight="900" fill="#5d70f6">AI</text>
-    <text x="630" y="286" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="12" fill="#3e4265" letter-spacing="0.3">Agents · Pipelines · Tools</text>
-  </g>
+        /* Bottom row */
+        .bottom-row {
+          position: absolute;
+          bottom: 28px;
+          left: 64px;
+          right: 64px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          opacity: 0;
+          animation: fadeUp 0.5s ease 1.4s forwards;
+        }
+        .bottom-left {
+          font-size: 9px;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          color: #3a4060;
+        }
+        .status {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 9px;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #3a4060;
+        }
+        .dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #5d70f6;
+          animation: pulse 2s ease infinite;
+        }
 
-  <!-- -- CARD 3: License -- -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.8s" fill="freeze"/>
-    <rect x="610" y="312" width="242" height="96" rx="5"
-      fill="#ffffff" fill-opacity="0.025" stroke="#5d70f6" stroke-opacity="0.15" stroke-width="1"/>
-    <text x="630" y="336" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="10" font-weight="600" fill="#2e3455" letter-spacing="3">LICENSE</text>
-    <text x="630" y="372" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="18" font-weight="800" fill="#ffffff">Open Source</text>
-    <text x="630" y="392" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="12" fill="#3e4265" letter-spacing="0.3">Fork it. Build on it.</text>
-  </g>
+        /* Corner mark */
+        .corner {
+          position: absolute;
+          top: 24px;
+          right: 64px;
+          font-size: 9px;
+          letter-spacing: 0.25em;
+          color: #2a2d45;
+          opacity: 0;
+          animation: fadeUp 0.4s ease 0.3s forwards;
+        }
+      </style>
 
-  <!-- -- BOTTOM BAR -- -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.0s" fill="freeze"/>
-    <line x1="56" y1="594" x2="844" y2="594" stroke="#5d70f6" stroke-opacity="0.1" stroke-width="1"/>
-    <circle cx="68" cy="616" r="3" fill="#5d70f6"/>
-    <text x="78" y="621" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="12" font-weight="500" fill="#5d70f6" letter-spacing="2">OPEN SOURCE</text>
-    <text x="216" y="621" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="12" font-weight="500" fill="#252840" letter-spacing="2">SELF-HOSTABLE</text>
-    <text x="364" y="621" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="12" font-weight="500" fill="#252840" letter-spacing="2">PRODUCTION-READY</text>
-    <text x="844" y="621" font-family="Helvetica Neue,Helvetica,Arial,sans-serif"
-      font-size="12" fill="#252840" letter-spacing="1" text-anchor="end">© Matan Dessaur</text>
-  </g>
+      <div class="wrap">
+        <div class="grid"></div>
+        <div class="scanline"></div>
+        <div class="accent-bar"></div>
+        <div class="corner">MATANDESSAUR.ME — AI ORG</div>
 
+        <div class="label">Open Source · AI Tools · Production Ready</div>
+
+        <div class="headline">
+          PROBLEMS IN.<br />
+          <span class="accent">SYSTEMS</span> OUT.
+        </div>
+
+        <div class="rule"></div>
+
+        <div class="sub">
+          Building and deploying AI-powered solutions that work.<br />
+          Everything here is open source — fork it, extend it, ship it.
+        </div>
+
+        <div class="bottom-row">
+          <div class="bottom-left">Matan Dessaur — AI Builder</div>
+          <div class="status">
+            <div class="dot"></div>
+            Actively building
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </foreignObject>
 </svg>
