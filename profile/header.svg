@@ -1,200 +1,347 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 900 380" width="900" height="380" data-abp-filters-channel="3ca9829b-be89-4665-b7b0-c9123e2d34dc"><script xmlns="" id="datalayer-checker-script"/>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 900 640" width="900" height="640">
   <foreignObject width="100%" height="100%">
     <div xmlns="http://www.w3.org/1999/xhtml">
       <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(20px); }
+          from { opacity: 0; transform: translateY(14px); }
           to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideIn {
-          from { width: 0; }
-          to   { width: 100%; }
         }
         @keyframes pulse {
           0%, 100% { opacity: 1; }
-          50%       { opacity: 0.4; }
+          50%       { opacity: 0.2; }
         }
-        @keyframes scanline {
-          0%   { transform: translateY(-100%); }
-          100% { transform: translateY(400px); }
+        @keyframes slideIn {
+          from { width: 0; }
+          to   { width: 54px; }
         }
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50%       { opacity: 0; }
+        @keyframes flicker {
+          0%,91%,95%,100% { opacity: 1; }
+          92%,94%          { opacity: 0.5; }
         }
-        @keyframes revealLeft {
-          from { opacity: 0; transform: translateX(-12px); }
-          to   { opacity: 1; transform: translateX(0); }
+        @keyframes topbar {
+          from { width: 0; }
+          to   { width: 620px; }
         }
 
         .wrap {
           width: 900px;
-          height: 380px;
-          background: #07080f;
-          font-family: 'Courier New', Courier, monospace;
+          height: 640px;
+          background: #0a0b10;
+          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
           overflow: hidden;
           position: relative;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          padding: 0 64px;
         }
 
-        /* Subtle grid lines */
         .grid {
-          position: absolute;
-          inset: 0;
+          position: absolute; inset: 0;
           background-image:
-            linear-gradient(rgba(93,112,246,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(93,112,246,0.04) 1px, transparent 1px);
-          background-size: 40px 40px;
+            linear-gradient(rgba(93,112,246,0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(93,112,246,0.05) 1px, transparent 1px);
+          background-size: 50px 50px;
         }
 
-        /* Left accent bar */
-        .accent-bar {
+        .glow {
           position: absolute;
-          left: 0;
-          top: 0;
-          bottom: 0;
-          width: 4px;
-          background: #5d70f6;
-          animation: fadeUp 0.4s ease forwards;
-        }
-
-        /* Scanline effect */
-        .scanline {
-          position: absolute;
-          left: 0; right: 0;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, rgba(93,112,246,0.15), transparent);
-          animation: scanline 6s linear infinite;
+          top: -100px; left: -80px;
+          width: 560px; height: 560px;
+          background: radial-gradient(circle, rgba(93,112,246,0.11) 0%, transparent 68%);
           pointer-events: none;
         }
 
-        /* Top label */
-        .label {
-          font-size: 10px;
-          letter-spacing: 0.35em;
+        .topbar {
+          position: absolute;
+          top: 0; left: 0; height: 2px;
+          background: linear-gradient(90deg, #5d70f6, transparent);
+          animation: topbar 0.8s ease forwards;
+        }
+
+        .leftbar {
+          position: absolute;
+          top: 0; left: 0;
+          width: 3px; height: 100%;
+          background: rgba(93,112,246,0.35);
+        }
+
+        /* NAV */
+        .nav {
+          position: absolute;
+          top: 30px; left: 56px; right: 56px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          opacity: 0;
+          animation: fadeUp 0.4s ease 0.1s forwards;
+        }
+        .logo {
+          font-size: 14px;
+          font-weight: 800;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #fff;
+        }
+        .logo span { color: #5d70f6; letter-spacing: 0; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-link {
+          font-size: 11px;
+          font-weight: 500;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #3e4265;
+        }
+
+        .nav-rule {
+          position: absolute;
+          top: 66px; left: 56px; right: 56px;
+          height: 1px;
+          background: rgba(93,112,246,0.13);
+          opacity: 0;
+          animation: fadeUp 0.3s ease 0.2s forwards;
+        }
+
+        /* HERO */
+        .hero {
+          position: absolute;
+          top: 98px; left: 56px;
+          width: 490px;
+        }
+
+        .eyebrow {
+          font-size: 11px;
+          font-weight: 500;
+          letter-spacing: 0.32em;
           text-transform: uppercase;
           color: #5d70f6;
           opacity: 0;
-          animation: revealLeft 0.5s ease 0.2s forwards;
+          animation: fadeUp 0.5s ease 0.3s forwards;
           margin-bottom: 20px;
+          display: flex;
+          align-items: center;
+          gap: 14px;
         }
-
-        /* Main headline */
-        .headline {
-          font-family: 'Arial Narrow', Arial, sans-serif;
-          font-size: 68px;
-          font-weight: 900;
-          line-height: 1;
-          letter-spacing: -0.02em;
-          color: #ffffff;
-          opacity: 0;
-          animation: fadeUp 0.6s ease 0.4s forwards;
-          margin-bottom: 6px;
-        }
-        .headline .accent { color: #5d70f6; }
-
-        /* Underline rule */
-        .rule {
-          height: 2px;
+        .eyebrow-line {
+          display: inline-block;
+          height: 1px;
           background: #5d70f6;
           width: 0;
-          animation: slideIn 0.7s cubic-bezier(0.4,0,0.2,1) 0.9s forwards;
-          margin-bottom: 20px;
+          animation: slideIn 0.5s ease 0.7s forwards;
         }
 
-        /* Sub copy */
-        .sub {
-          font-size: 13px;
-          letter-spacing: 0.08em;
-          color: #8892b0;
+        .h1 {
+          font-size: 82px;
+          font-weight: 900;
+          line-height: 1.07;
+          letter-spacing: -0.025em;
+          color: #fff;
           opacity: 0;
-          animation: fadeUp 0.6s ease 1.1s forwards;
-          max-width: 540px;
-          line-height: 1.7;
+          animation: fadeUp 0.5s ease 0.4s forwards, flicker 9s ease 5s infinite;
+          margin-bottom: 28px;
+        }
+        .h1 .blue { color: #5d70f6; }
+
+        .tagline {
+          font-size: 14px;
+          line-height: 1.75;
+          color: #55607a;
+          opacity: 0;
+          animation: fadeUp 0.5s ease 0.65s forwards;
+          margin-bottom: 36px;
         }
 
-        /* Bottom row */
-        .bottom-row {
-          position: absolute;
-          bottom: 28px;
-          left: 64px;
-          right: 64px;
+        .cta-row {
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          gap: 26px;
           opacity: 0;
-          animation: fadeUp 0.5s ease 1.4s forwards;
+          animation: fadeUp 0.5s ease 0.85s forwards;
         }
-        .bottom-left {
-          font-size: 9px;
+        .btn {
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          padding: 13px 24px;
+          background: #5d70f6;
+          color: #fff;
+          border-radius: 3px;
+          white-space: nowrap;
+        }
+        .btn-ghost {
+          font-size: 12px;
+          font-weight: 500;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #3e4265;
+          border-bottom: 1px solid #252840;
+          padding-bottom: 2px;
+          white-space: nowrap;
+        }
+
+        /* RIGHT PANEL */
+        .panel {
+          position: absolute;
+          top: 98px; right: 56px;
+          width: 248px;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+
+        .card {
+          background: rgba(255,255,255,0.025);
+          border: 1px solid rgba(93,112,246,0.15);
+          border-radius: 6px;
+          padding: 18px 22px;
+        }
+        .card:nth-child(1) { opacity:0; animation: fadeUp 0.5s ease 0.55s forwards; }
+        .card:nth-child(2) { opacity:0; animation: fadeUp 0.5s ease 0.70s forwards; }
+        .card:nth-child(3) { opacity:0; animation: fadeUp 0.5s ease 0.85s forwards; }
+
+        .card-label {
+          font-size: 10px;
+          font-weight: 700;
           letter-spacing: 0.3em;
           text-transform: uppercase;
-          color: #3a4060;
-        }
-        .status {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          font-size: 9px;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
-          color: #3a4060;
-        }
-        .dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: #5d70f6;
-          animation: pulse 2s ease infinite;
+          color: #2e3455;
+          margin-bottom: 12px;
         }
 
-        /* Corner mark */
-        .corner {
+        .pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(93,112,246,0.09);
+          border: 1px solid rgba(93,112,246,0.26);
+          border-radius: 100px;
+          padding: 7px 14px;
+          white-space: nowrap;
+        }
+        .pill-dot {
+          width: 6px; height: 6px;
+          border-radius: 50%;
+          background: #5d70f6;
+          flex-shrink: 0;
+          animation: pulse 1.8s ease infinite;
+        }
+        .pill-text {
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #5d70f6;
+        }
+
+        .card-val {
+          font-size: 28px;
+          font-weight: 900;
+          color: #5d70f6;
+          letter-spacing: -0.02em;
+          line-height: 1;
+          margin-bottom: 6px;
+        }
+        .card-val-sm {
+          font-size: 18px;
+          font-weight: 800;
+          color: #fff;
+          letter-spacing: -0.01em;
+          line-height: 1.1;
+          margin-bottom: 6px;
+        }
+        .card-sub {
+          font-size: 12px;
+          color: #3e4265;
+          letter-spacing: 0.04em;
+        }
+
+        /* BOTTOM BAR */
+        .bottombar {
           position: absolute;
-          top: 24px;
-          right: 64px;
-          font-size: 9px;
-          letter-spacing: 0.25em;
-          color: #2a2d45;
+          bottom: 30px; left: 56px; right: 56px;
+          border-top: 1px solid rgba(93,112,246,0.1);
+          padding-top: 18px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           opacity: 0;
-          animation: fadeUp 0.4s ease 0.3s forwards;
+          animation: fadeUp 0.4s ease 1.05s forwards;
+        }
+        .bottom-left { display: flex; gap: 26px; }
+        .bitem {
+          font-size: 11px;
+          font-weight: 500;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #252840;
+          white-space: nowrap;
+        }
+        .bitem.on { color: #5d70f6; }
+        .bottom-right {
+          font-size: 11px;
+          color: #252840;
+          letter-spacing: 0.1em;
+          white-space: nowrap;
         }
       </style>
 
       <div class="wrap">
         <div class="grid"></div>
-        <div class="scanline"></div>
-        <div class="accent-bar"></div>
-        <div class="corner">MATANDESSAUR.ME — AI ORG</div>
+        <div class="glow"></div>
+        <div class="topbar"></div>
+        <div class="leftbar"></div>
 
-        <div class="label">Open Source · AI Tools · Production Ready</div>
-
-        <div class="headline">
-          PROBLEMS IN.<br />
-          <span class="accent">SYSTEMS</span> OUT.
-        </div>
-
-        <div class="rule"></div>
-
-        <div class="sub">
-          Building and deploying AI-powered solutions that work.<br />
-          Everything here is open source — fork it, extend it, ship it.
-        </div>
-
-        <div class="bottom-row">
-          <div class="bottom-left">Matan Dessaur — AI Builder</div>
-          <div class="status">
-            <div class="dot"></div>
-            Actively building
+        <div class="nav">
+          <div class="logo">MATAN DESSAUR</div>
+          <div class="nav-links">
+            <div class="nav-link">Work</div>
+            <div class="nav-link">Stack</div>
+            <div class="nav-link">Open Source</div>
           </div>
         </div>
-      </div>
+        <div class="nav-rule"></div>
 
+        <div class="hero">
+          <div class="eyebrow"><span class="eyebrow-line"></span>AI Builder &#x2022; Open Source</div>
+          <div class="h1">BUILD.<br/><span class="blue">SHIP.</span><br/>REPEAT.</div>
+          <div class="tagline">
+            I build and deploy AI-powered solutions<br/>
+            that turn problems into working systems.
+          </div>
+          <div class="cta-row">
+            <div class="btn">Explore Repos</div>
+            <div class="btn-ghost">matandessaur.me &#x2197;</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="card">
+            <div class="card-label">Status</div>
+            <div class="pill">
+              <div class="pill-dot"></div>
+              <div class="pill-text">Actively Building</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-label">Focus</div>
+            <div class="card-val">AI</div>
+            <div class="card-sub">Agents &#xB7; Pipelines &#xB7; Tools</div>
+          </div>
+          <div class="card">
+            <div class="card-label">License</div>
+            <div class="card-val-sm">Open Source</div>
+            <div class="card-sub">Fork it. Build on it.</div>
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="bottom-left">
+            <div class="bitem on">&#x25CF;&#xA0;Open Source</div>
+            <div class="bitem">Self-hostable</div>
+            <div class="bitem">Production-ready</div>
+          </div>
+          <div class="bottom-right">&#xA9; Matan Dessaur</div>
+        </div>
+      </div>
     </div>
   </foreignObject>
 </svg>
