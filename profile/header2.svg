@@ -1,0 +1,347 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 900 640" width="900" height="640">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(14px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0.2; }
+        }
+        @keyframes slideIn {
+          from { width: 0; }
+          to   { width: 54px; }
+        }
+        @keyframes flicker {
+          0%,91%,95%,100% { opacity: 1; }
+          92%,94%          { opacity: 0.5; }
+        }
+        @keyframes topbar {
+          from { width: 0; }
+          to   { width: 620px; }
+        }
+
+        .wrap {
+          width: 900px;
+          height: 640px;
+          background: #0a0b10;
+          font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .grid {
+          position: absolute; inset: 0;
+          background-image:
+            linear-gradient(rgba(93,112,246,0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(93,112,246,0.05) 1px, transparent 1px);
+          background-size: 50px 50px;
+        }
+
+        .glow {
+          position: absolute;
+          top: -100px; left: -80px;
+          width: 560px; height: 560px;
+          background: radial-gradient(circle, rgba(93,112,246,0.11) 0%, transparent 68%);
+          pointer-events: none;
+        }
+
+        .topbar {
+          position: absolute;
+          top: 0; left: 0; height: 2px;
+          background: linear-gradient(90deg, #5d70f6, transparent);
+          animation: topbar 0.8s ease forwards;
+        }
+
+        .leftbar {
+          position: absolute;
+          top: 0; left: 0;
+          width: 3px; height: 100%;
+          background: rgba(93,112,246,0.35);
+        }
+
+        /* NAV */
+        .nav {
+          position: absolute;
+          top: 30px; left: 56px; right: 56px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          opacity: 0;
+          animation: fadeUp 0.4s ease 0.1s forwards;
+        }
+        .logo {
+          font-size: 14px;
+          font-weight: 800;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #fff;
+        }
+        .logo span { color: #5d70f6; letter-spacing: 0; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-link {
+          font-size: 11px;
+          font-weight: 500;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #3e4265;
+        }
+
+        .nav-rule {
+          position: absolute;
+          top: 66px; left: 56px; right: 56px;
+          height: 1px;
+          background: rgba(93,112,246,0.13);
+          opacity: 0;
+          animation: fadeUp 0.3s ease 0.2s forwards;
+        }
+
+        /* HERO */
+        .hero {
+          position: absolute;
+          top: 98px; left: 56px;
+          width: 490px;
+        }
+
+        .eyebrow {
+          font-size: 11px;
+          font-weight: 500;
+          letter-spacing: 0.32em;
+          text-transform: uppercase;
+          color: #5d70f6;
+          opacity: 0;
+          animation: fadeUp 0.5s ease 0.3s forwards;
+          margin-bottom: 20px;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+        }
+        .eyebrow-line {
+          display: inline-block;
+          height: 1px;
+          background: #5d70f6;
+          width: 0;
+          animation: slideIn 0.5s ease 0.7s forwards;
+        }
+
+        .h1 {
+          font-size: 82px;
+          font-weight: 900;
+          line-height: 1.07;
+          letter-spacing: -0.025em;
+          color: #fff;
+          opacity: 0;
+          animation: fadeUp 0.5s ease 0.4s forwards, flicker 9s ease 5s infinite;
+          margin-bottom: 28px;
+        }
+        .h1 .blue { color: #5d70f6; }
+
+        .tagline {
+          font-size: 14px;
+          line-height: 1.75;
+          color: #55607a;
+          opacity: 0;
+          animation: fadeUp 0.5s ease 0.65s forwards;
+          margin-bottom: 36px;
+        }
+
+        .cta-row {
+          display: flex;
+          align-items: center;
+          gap: 26px;
+          opacity: 0;
+          animation: fadeUp 0.5s ease 0.85s forwards;
+        }
+        .btn {
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          padding: 13px 24px;
+          background: #5d70f6;
+          color: #fff;
+          border-radius: 3px;
+          white-space: nowrap;
+        }
+        .btn-ghost {
+          font-size: 12px;
+          font-weight: 500;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #3e4265;
+          border-bottom: 1px solid #252840;
+          padding-bottom: 2px;
+          white-space: nowrap;
+        }
+
+        /* RIGHT PANEL */
+        .panel {
+          position: absolute;
+          top: 98px; right: 56px;
+          width: 248px;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+
+        .card {
+          background: rgba(255,255,255,0.025);
+          border: 1px solid rgba(93,112,246,0.15);
+          border-radius: 6px;
+          padding: 18px 22px;
+        }
+        .card:nth-child(1) { opacity:0; animation: fadeUp 0.5s ease 0.55s forwards; }
+        .card:nth-child(2) { opacity:0; animation: fadeUp 0.5s ease 0.70s forwards; }
+        .card:nth-child(3) { opacity:0; animation: fadeUp 0.5s ease 0.85s forwards; }
+
+        .card-label {
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          color: #2e3455;
+          margin-bottom: 12px;
+        }
+
+        .pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(93,112,246,0.09);
+          border: 1px solid rgba(93,112,246,0.26);
+          border-radius: 100px;
+          padding: 7px 14px;
+          white-space: nowrap;
+        }
+        .pill-dot {
+          width: 6px; height: 6px;
+          border-radius: 50%;
+          background: #5d70f6;
+          flex-shrink: 0;
+          animation: pulse 1.8s ease infinite;
+        }
+        .pill-text {
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #5d70f6;
+        }
+
+        .card-val {
+          font-size: 28px;
+          font-weight: 900;
+          color: #5d70f6;
+          letter-spacing: -0.02em;
+          line-height: 1;
+          margin-bottom: 6px;
+        }
+        .card-val-sm {
+          font-size: 18px;
+          font-weight: 800;
+          color: #fff;
+          letter-spacing: -0.01em;
+          line-height: 1.1;
+          margin-bottom: 6px;
+        }
+        .card-sub {
+          font-size: 12px;
+          color: #3e4265;
+          letter-spacing: 0.04em;
+        }
+
+        /* BOTTOM BAR */
+        .bottombar {
+          position: absolute;
+          bottom: 30px; left: 56px; right: 56px;
+          border-top: 1px solid rgba(93,112,246,0.1);
+          padding-top: 18px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          opacity: 0;
+          animation: fadeUp 0.4s ease 1.05s forwards;
+        }
+        .bottom-left { display: flex; gap: 26px; }
+        .bitem {
+          font-size: 11px;
+          font-weight: 500;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #252840;
+          white-space: nowrap;
+        }
+        .bitem.on { color: #5d70f6; }
+        .bottom-right {
+          font-size: 11px;
+          color: #252840;
+          letter-spacing: 0.1em;
+          white-space: nowrap;
+        }
+      </style>
+
+      <div class="wrap">
+        <div class="grid"></div>
+        <div class="glow"></div>
+        <div class="topbar"></div>
+        <div class="leftbar"></div>
+
+        <div class="nav">
+          <div class="logo">MATAN<span>.</span>DESSAUR</div>
+          <div class="nav-links">
+            <div class="nav-link">Work</div>
+            <div class="nav-link">Stack</div>
+            <div class="nav-link">Open Source</div>
+          </div>
+        </div>
+        <div class="nav-rule"></div>
+
+        <div class="hero">
+          <div class="eyebrow"><span class="eyebrow-line"></span>AI Builder &bull; Open Source</div>
+          <div class="h1">BUILD.<br/><span class="blue">SHIP.</span><br/>REPEAT.</div>
+          <div class="tagline">
+            I build and deploy AI-powered solutions<br/>
+            that turn problems into working systems.
+          </div>
+          <div class="cta-row">
+            <div class="btn">Explore Repos</div>
+            <div class="btn-ghost">matandessaur.me &#x2197;</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="card">
+            <div class="card-label">Status</div>
+            <div class="pill">
+              <div class="pill-dot"></div>
+              <div class="pill-text">Actively Building</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-label">Focus</div>
+            <div class="card-val">AI</div>
+            <div class="card-sub">Agents &middot; Pipelines &middot; Tools</div>
+          </div>
+          <div class="card">
+            <div class="card-label">License</div>
+            <div class="card-val-sm">Open Source</div>
+            <div class="card-sub">Fork it. Build on it.</div>
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="bottom-left">
+            <div class="bitem on">&#x25CF;&nbsp;Open Source</div>
+            <div class="bitem">Self-hostable</div>
+            <div class="bitem">Production-ready</div>
+          </div>
+          <div class="bottom-right">&copy; Matan Dessaur</div>
+        </div>
+      </div>
+    </div>
+  </foreignObject>
+</svg>
